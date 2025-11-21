@@ -1,2 +1,33 @@
-# Auto detect text files and perform LF normalization
-* text=auto
+# Handlebars scripts
+*.hbs text eol=lf diff=handlebars
+
+# Text files
+*.txt text eol=lf
+
+# Markdown files
+*.md text eol=lf
+
+# Configuration files
+*.ecf text eol=lf
+*.csv text eol=lf
+
+# Binary files
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+
+# Archives
+*.zip binary
+*.rar binary
+*.7z binary
+
+# Executables
+*.exe binary
+*.dll binary
+
+# OS files
+.DS_Store binary
+Thumbs.db binary
+

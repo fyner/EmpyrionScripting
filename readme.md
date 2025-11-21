@@ -1,4 +1,4 @@
-# Empyrion Scripting - Item Sorter
+# Empyrion Scripting
 
 Script collections for Empyrion Scripting mod.
 

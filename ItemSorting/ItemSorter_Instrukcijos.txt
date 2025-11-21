@@ -1,0 +1,132 @@
+═══════════════════════════════════════════════════════════════════════════════
+  ITEMSORTER_BYCATEGORY.HBS - INSTRUKCIJOS
+═══════════════════════════════════════════════════════════════════════════════
+
+1. PAGRINDINIS KONTEINERIS (ŠALTINIS):
+   ────────────────────────────────────────────────────────────────────────────
+   Pavadinimas: Main
+   
+   Šis konteineris yra šaltinis - į jį dedate daiktus, kuriuos norite 
+   surūšiuoti. Skriptas automatiškai nuskaitys daiktus iš šio konteinerio
+   ir perkels juos į atitinkamus konteinerius pagal jų kategorijas.
+
+   ⚠️ SVARBU: Pavadinimas turi būti TIKSLIAI "Main" (be tarpų, be didžiųjų raidžių).
+
+
+2. LCD EKRANAS (SAVEGAME METODAS):
+   ────────────────────────────────────────────────────────────────────────────
+   Pavadinimas: ItemSorter_ByCategory
+   
+   Jei naudojate SaveGame skriptą:
+   - Failas: ItemSorter_ByCategory.hbs
+   - LCD pavadinimas: ItemSorter_ByCategory
+   
+   ⚠️ SVARBU: 
+   - LCD pavadinimas turi būti TIKSLIAI kaip skripto failo pavadinimas (be .hbs)
+   - Nereikia "Script:" prefikso SaveGame skriptams
+   - Skriptas veiks automatiškai serveryje
+
+
+3. TIKSLŲ KONTEINERIŲ PAVADINIMAI (PAGAL KATEGORIJAS):
+   ────────────────────────────────────────────────────────────────────────────
+   
+   Sukurkite konteinerius su šiais TIKSLIAIS pavadinimais (be tarpų, be didžiųjų raidžių):
+   
+   ┌─────────────────────────────────────────────────────────────────────────┐
+   │ VISOS KATEGORIJOS (REFORGED EDEN 2 - IŠ KONFIGŪRACIJOS FAILŲ):          │
+   └─────────────────────────────────────────────────────────────────────────┘
+   
+   Iš CategoryItemList.txt ir ItemsConfig.ecf failų analizės rastos šios kategorijos:
+   
+   1. Weapons/Items     - Ginklai ir įrankiai (daugiausia daiktų)
+   2. Food              - Maistas
+   3. Components        - Komponentai
+   4. Devices           - Įrenginiai
+   5. BuildingBlocks    - Statybos blokai
+   6. Deco Blocks       - Dekoratyviniai blokai
+   7. Ingredients       - Ingredientai
+   8. Medical           - Medicinos daiktai
+   9. Tokens            - Žetonai/raktai
+   
+   ⚠️ SVARBU: 
+   - Tai yra VISOS kategorijos, kurias radau konfigūracijos failuose
+   - Sukurkite konteinerius su TIKSLIAIS pavadinimais:
+     * Weapons/Items     (su "/" simboliu!)
+     * Food
+     * Components
+     * Devices
+     * BuildingBlocks
+     * Deco Blocks       (su tarpu!)
+     * Ingredients
+     * Medical
+     * Tokens
+   - Jei daiktas neturi kategorijos, jis nebus perkeltas
+   - Sukurkite konteinerius tik tiems kategorijoms, kurias naudojate
+   
+   ⚠️ SVARBU: 
+   - Pavadinimai turi būti TIKSLIAI kaip nurodyta (su "/" jei yra)
+   - Didžiosios/mažosios raidės TURĖTŲ atitikti
+   - Be papildomų tarpų ar simbolių
+
+
+4. KAIP NAUDOTI:
+   ────────────────────────────────────────────────────────────────────────────
+   
+   a) Sukurkite konteinerius:
+      - Vieną "Main" konteinerį (šaltinis)
+      - Kiekvienam kategorijai atskirą konteinerį (pvz. "Weapons/Items", "Food", ir t.t.)
+   
+   b) Įdėkite daiktus į "Main" konteinerį
+   
+   c) Skriptas automatiškai:
+      - Nuskaitys daiktus iš "Main"
+      - Nustatys jų kategorijas iš ECF
+      - Perkels į atitinkamus konteinerius
+   
+   d) LCD ekrane matysite:
+      - Laiką
+      - Perkeltų daiktų kiekį
+      - Daikto pavadinimą
+      - Kategoriją
+      - Iš kur → į kur perkelta
+
+
+5. PAVYZDYS:
+   ────────────────────────────────────────────────────────────────────────────
+   
+   Turite:
+   - Konteineris: "Main" (šaltinis)
+   - Konteineris: "Weapons/Items" (tikslas)
+   - Konteineris: "Food" (tikslas)
+   - Konteineris: "Components" (tikslas)
+   
+   Įdedate į "Main":
+   - Ginklą (kategorija: Weapons/Items)
+   - Maistą (kategorija: Food)
+   - Komponentą (kategorija: Components)
+   
+   Skriptas automatiškai perkels:
+   - Ginklą → "Weapons/Items"
+   - Maistą → "Food"
+   - Komponentą → "Components"
+
+
+6. KLAIDOS:
+   ────────────────────────────────────────────────────────────────────────────
+   
+   Jei matote "Kategorija nerasta!":
+   - Daiktas neturi kategorijos ECF faile
+   - Daiktas nebus perkeltas
+   - Jis liks "Main" konteineryje
+
+
+7. PASTABOS:
+   ────────────────────────────────────────────────────────────────────────────
+   
+   - Skriptas veikia tik su daiktais, kurie turi kategoriją ECF faile
+   - Jei kategorijos nėra, daiktas nebus perkeltas
+   - Konteinerių pavadinimai turi būti TIKSLIAI kaip kategorijos pavadinimai
+   - Skriptas veikia automatiškai serveryje (SaveGame metodas)
+
+═══════════════════════════════════════════════════════════════════════════════
+

@@ -1,0 +1,73 @@
+{{! -------------------------------------------------------
+-- Description: PILNA daiktų informacija su visais atributais
+-- Requires:
+-- * Container: Main (arba bet koks konteinerio pavadinimas)
+-- * LCD: Script:ItemInfo_Full (In-Game) arba ItemInfo_Full.hbs (SaveGame)
+-- * Output LCD: ItemInfo_Full
+-- -------------------------------------------------------}}
+
+<align=center><size=+2><color=cyan><b>📦 PILNA DAIKTŲ INFORMACIJA</b></color></size></align>
+<color=white>{{bar 1 0 1 50 '═'}}</color>
+
+{{#items E.S 'Main'}}
+<color=yellow>Konteineris: Main</color>
+<color=white>{{bar 1 0 1 50 '─'}}</color>
+
+<line-height=1>
+<color=cyan>═══════════════════════════════════════════════════════</color>
+<size=+2><color=green><b>{{i18n Id}}</b></color></size>
+<color=cyan>═══════════════════════════════════════════════════════</color>
+
+<pos=5><color=yellow><size=+1>PAGRINDINĖ INFORMACIJA:</size></color>
+<pos=10>  <color=#00ff00>ID:</color> <color=white>{{Id}}</color>
+<pos=10>  <color=#00ff00>Pavadinimas:</color> <color=white>{{Name}}</color>
+<pos=10>  <color=#00ff00>Lokalizuotas pavadinimas:</color> <color=white>{{i18n Id}}</color>
+<pos=10>  <color=#00ff00>Kiekis:</color> <color=white>{{Count}}</color>
+
+<pos=5><color=yellow><size=+1>PAGRINDINIAI ATRIBUTAI:</size></color>
+<pos=10>  <color=#00ff00>Tūris (Volume):</color> <color=white>{{configattr Id 'Volume'}}</color>
+<pos=10>  <color=#00ff00>Masa (Mass):</color> <color=white>{{configattr Id 'Mass'}}</color>
+<pos=10>  <color=#00ff00>Stack dydis (StackSize):</color> <color=white>{{configattr Id 'StackSize'}}</color>
+<pos=10>  <color=#00ff00>Grupė (Group):</color> <color=white>{{configattr Id 'Group'}}</color>
+
+{{~#configbyid Id}}
+<pos=5><color=yellow><size=+1>VISI ATRIBUTAI (Attr):</size></color>
+{{~#each Attr}}
+<pos=10>  <color=#00ff00>{{Name}}</color>: <color=white>{{Value}}</color>
+{{~#if AddOns}}
+<pos=15>    <color=#ffaa00>AddOns:</color>
+{{~#each AddOns}}
+<pos=20>      <color=#ffaa00>{{@key}}</color>: <color=white>{{.}}</color>
+{{/each}}
+{{/if}}
+{{/each}}
+
+{{~#if Childs}}
+<pos=5><color=yellow><size=+1>CHILDS (Vaikai):</size></color>
+{{~#each Childs}}
+<pos=10>  <color=cyan>━━━ Child {{@index}} ━━━</color>
+{{~#each Attr}}
+<pos=15>    <color=#00ff00>{{Name}}</color>: <color=white>{{Value}}</color>
+{{~#if AddOns}}
+<pos=20>      <color=#ffaa00>AddOns:</color>
+{{~#each AddOns}}
+<pos=25>        <color=#ffaa00>{{@key}}</color>: <color=white>{{.}}</color>
+{{/each}}
+{{/if}}
+{{/each}}
+{{/each}}
+{{/if}}
+{{/configbyid}}
+
+<pos=5><color=yellow><size=+1>SKAIČIAVIMAI:</size></color>
+<pos=10>  <color=#00ff00>Bendras tūris:</color> <color=white>{{calc (configattr Id 'Volume') '*' Count}}</color>
+<pos=10>  <color=#00ff00>Bendra masė:</color> <color=white>{{calc (configattr Id 'Mass') '*' Count}}</color>
+<pos=10>  <color=#00ff00>Stack kiekis:</color> <color=white>{{calc Count '/' (configattr Id 'StackSize')}}</color>
+<pos=10>  <color=#00ff00>Laisva vieta stack'e:</color> <color=white>{{calc (configattr Id 'StackSize') '-' (calc Count '%' (configattr Id 'StackSize'))}}</color>
+
+<color=cyan>═══════════════════════════════════════════════════════</color>
+
+{{else}}
+<align=center><color=red><size=+1>Konteineris tuščias!</size></color></align>
+{{/items}}
+

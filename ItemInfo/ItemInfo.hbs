@@ -1,0 +1,66 @@
+{{! -------------------------------------------------------
+-- Description: Rodo visą informaciją apie daiktus konteineryje
+-- Requires:
+-- * Container: Main (arba bet koks konteinerio pavadinimas)
+-- * LCD: Script:ItemInfo (In-Game) arba ItemInfo.hbs (SaveGame)
+-- * Output LCD: ItemInfo
+-- -------------------------------------------------------}}
+
+<align=center><size=+2><color=cyan><b>📦 DAIKTŲ INFORMACIJA</b></color></size></align>
+<color=white>{{bar 1 0 1 50 '═'}}</color>
+
+{{#items E.S 'Main'}}
+<color=yellow>Konteineris: Main</color>
+<color=white>{{bar 1 0 1 50 '─'}}</color>
+
+<line-height=1>
+<color=cyan>━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</color>
+<size=+1><color=green><b>{{i18n Id}}</b></color></size>
+<color=cyan>━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</color>
+
+<pos=5><color=yellow>PAGRINDINĖ INFORMACIJA:</color>
+<pos=10>  ID: <color=white>{{Id}}</color>
+<pos=10>  Pavadinimas: <color=white>{{Name}}</color>
+<pos=10>  Kiekis: <color=white>{{Count}}</color>
+<pos=10>  Lokalizuotas: <color=white>{{i18n Id}}</color>
+
+<pos=5><color=yellow>ATRIBUTAI:</color>
+<pos=10>  Tūris: <color=white>{{configattr Id 'Volume'}}</color>
+<pos=10>  Masa: <color=white>{{configattr Id 'Mass'}}</color>
+<pos=10>  Stack dydis: <color=white>{{configattr Id 'StackSize'}}</color>
+<pos=10>  Grupė: <color=white>{{configattr Id 'Group'}}</color>
+
+{{~#configbyid Id}}
+<pos=5><color=yellow>VISI ATRIBUTAI:</color>
+{{~#each Attr}}
+<pos=10>  <color=#00ff00>{{Name}}</color>: <color=white>{{Value}}</color>
+{{~#each AddOns}}
+<pos=15>    <color=#ffaa00>{{@key}}</color>: <color=white>{{.}}</color>
+{{/each}}
+{{/each}}
+
+{{~#if Childs}}
+<pos=5><color=yellow>CHILDS (Vaikai):</color>
+{{~#each Childs}}
+<pos=10>  <color=cyan>Child {{@index}}:</color>
+{{~#each Attr}}
+<pos=15>    <color=#00ff00>{{Name}}</color>: <color=white>{{Value}}</color>
+{{~#each AddOns}}
+<pos=20>      <color=#ffaa00>{{@key}}</color>: <color=white>{{.}}</color>
+{{/each}}
+{{/each}}
+{{/each}}
+{{/if}}
+{{/configbyid}}
+
+<pos=5><color=yellow>SKAIČIAVIMAI:</color>
+<pos=10>  Bendras tūris: <color=white>{{calc (configattr Id 'Volume') '*' Count}}</color>
+<pos=10>  Bendra masė: <color=white>{{calc (configattr Id 'Mass') '*' Count}}</color>
+<pos=10>  Stack kiekis: <color=white>{{calc Count '/' (configattr Id 'StackSize')}}</color>
+
+<color=cyan>━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</color>
+
+{{else}}
+<align=center><color=red><size=+1>Konteineris tuščias!</size></color></align>
+{{/items}}
+

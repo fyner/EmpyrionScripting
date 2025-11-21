@@ -1,0 +1,36 @@
+{{! -------------------------------------------------------
+-- Description: Rūšiuoja daiktus pagal ECF kategorijas
+-- Įdėkite daiktus į "Main" konteinerį, jie bus automatiškai 
+-- perkelti į konteinerius pagal jų kategorijas
+-- Requires:
+-- * Container: Main (šaltinis)
+-- * Containers: Weapons/Items, Food, Components, Ingredients, Medical, ir t.t. (tikslai)
+-- * LCD: Script:ItemSorter_ByCategory (In-Game) arba ItemSorter_ByCategory.hbs (SaveGame)
+-- * Output LCD: ItemSorter_ByCategory (neprivaloma)
+-- -------------------------------------------------------}}
+
+<align=center><color=green><size=+1>RŪŠIAVIMAS PAGAL KATEGORIJAS</size></color></align>
+
+{{#items E.S 'Main'}}
+{{~set 'ItemCategory' ''}}
+{{~set 'TargetContainer' ''}}
+
+{{~#configbyid Id}}
+{{~#each Attr}}
+{{~#test Name 'eq' 'Category'}}
+{{~set 'ItemCategory' Value}}
+{{/test}}
+{{/each}}
+{{/configbyid}}
+
+{{~#if @root.Data.ItemCategory}}
+{{~set 'TargetContainer' @root.Data.ItemCategory}}
+{{~#move this E.S @root.Data.TargetContainer}}
+<pos=1>{{datetime 'HH:mm:ss'}}</pos> <pos=75>| <color=yellow>Sort</color></pos><pos=125>| {{Count}}</pos><pos=180>| {{i18n Id}}</pos><pos=300>| <color=#ff00ff>Kategorija: {{@root.Data.ItemCategory}}</color></pos><pos=460>| {{Source}} <color=green>❱</color> {{Destination}}</pos>
+{{/move}}
+{{else}}
+<pos=1>{{datetime 'HH:mm:ss'}}</pos> <pos=75>| <color=red>Klaida</color></pos><pos=125>| {{Count}}</pos><pos=180>| {{i18n Id}}</pos><pos=300>| <color=red>Kategorija nerasta!</color></pos>
+{{/if}}
+
+{{/items}}
+
